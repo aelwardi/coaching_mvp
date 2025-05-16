@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\statusSeanceEnum;
 use App\Repository\SeanceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +23,9 @@ class Seance
 
     #[ORM\ManyToOne(inversedBy: 'seances')]
     private ?Programme $programme = null;
+
+    #[ORM\Column(enumType: statusSeanceEnum::class)]
+    private ?statusSeanceEnum $status = null;
 
     public function getId(): ?int
     {
@@ -60,6 +64,18 @@ class Seance
     public function setProgramme(?Programme $programme): static
     {
         $this->programme = $programme;
+
+        return $this;
+    }
+
+    public function getStatus(): ?statusSeanceEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(statusSeanceEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

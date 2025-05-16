@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Détail de l'utilisateur</h1>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>ID :</strong> {{ user.id }}</li>
+        <li class="list-group-item"><strong>Email :</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>Nom :</strong> {{ user.lastName }}</li>
+        <li class="list-group-item"><strong>Prénom :</strong> {{ user.firstName }}</li>
+        <li class="list-group-item"><strong>Rôle :</strong> {{ user.role }}</li>
+        <li class="list-group-item"><strong>Banni :</strong> {{ user.isBanned ? 'Oui' : 'Non' }}</li>
+    </ul>
+    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+    <a href="{{ path('user_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\roleAccountEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,6 +37,9 @@ class User
      */
     #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'usere')]
     private Collection $seances;
+
+    #[ORM\Column(enumType: roleAccountEnum::class)]
+    private ?roleAccountEnum $role = null;
 
     public function __construct()
     {
@@ -133,6 +137,18 @@ class User
                 $seance->setUsere(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRole(): ?roleAccountEnum
+    {
+        return $this->role;
+    }
+
+    public function setRole(roleAccountEnum $role): static
+    {
+        $this->role = $role;
 
         return $this;
     }
