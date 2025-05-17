@@ -51,6 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->coaches = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

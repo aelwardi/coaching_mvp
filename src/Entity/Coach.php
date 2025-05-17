@@ -42,6 +42,10 @@ class Coach
         $this->programmes = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->fullName . ' - ' . $this->speciality;
+    }
     public function getId(): ?int
     {
         return $this->id;
