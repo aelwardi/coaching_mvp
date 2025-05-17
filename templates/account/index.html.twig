@@ -1,5 +1,10 @@
 <div>
     <h1>Espace membre</h1>
+    <div>
+        <h2>Mes informations</h2>
+        <p>Nom : {{ app.user.firstName }} {{ app.user.lastName }}</p>
+        <p>Email : {{ app.user.email }}</p>
+    </div>
     <p><a href="{{ path('app_logout') }}">Se déconnecter</a></p>
     <p><a href="{{ path('app_account_modify_password') }}">Changer mon mot de passe</a></p>
 </div>
