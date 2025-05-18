@@ -1,21 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr" data-bs-theme="auto">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Mon Application{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coaching</title>
+    <meta name="description" content="Coaching">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ path('app_home') }}">Accueil</a>
-            <div class="collapse navbar-collapse">
 
+<header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('app_home') }}">Coaching</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        {% if app.user %}
+                        <a class="nav-link" href="{{ path('app_account') }}">
+                            <i data-feather="user"></i> {{ app.user.firstName }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">
+                            <i data-feather="log-out"></i> Déconnexion
+                        </a>
+                    </li>
+                        {% else %}
+                        <a class="nav-link" href="{{ path('app_login') }}">
+                            <i data-feather="user"></i> Connexion
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
-    <div class="container mt-4">
+</header>
+
+<main class="flex-shrink-0" style="padding-top: 80px;">
+    <div class="container py-4">
         {% block body %}{% endblock %}
     </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light border-top">
+    <div class="container text-center">
+        <span class="text-muted">&copy; Coaching</span>
+    </div>
+</footer>
+
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/global.js') }}"></script>
+<script>
+    feather.replace()
+</script>
 </body>
 </html>

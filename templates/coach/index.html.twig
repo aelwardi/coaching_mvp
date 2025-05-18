@@ -1,0 +1,15 @@
+<div>
+    <h1>Coaches</h1>
+    <h1>{{ coach.fullName }}</h1>
+    <p>Cette coach contient {{ coach.programmes|length }} programme(s).</p>
+    <div class="row">
+            {% for programme in coach.programmes %}
+                <div class="col-md-3 text-center">
+                    <a class="text-decoration-none" href="{{ path('app_programme', { 'slug': programme.slug }) }}">
+                        <img class="img-fluid" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}">
+                        <span class="d-block fw-bold text-black">{{ programme.title }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div> 
+</div>

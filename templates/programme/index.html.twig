@@ -1,0 +1,16 @@
+<div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}">
+            </div>
+            <div class="col-md-6">
+                <small>
+                    <i>
+                        <a href="{{ path('app_coach', { slug : programme.coach.slug })}}">{{ programme.coach.fullName }}</a>
+                        {{ programme.title }}
+                    </i>
+                </small>
+                {{ programme.description|raw }}
+            </div>
+        </div>
+    </div>
