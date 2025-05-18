@@ -1,5 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+{% if app.user is not defined or app.user is null %}
+    <div>Bienvenue</div>
+{% else %}
+    {% if 'BANNED' in app.user.roles %}
+        <div class="alert alert-danger">Vous êtes banni.</div>
+    {% else %}
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <a href="{{ path('admin') }}" class="btn btn-primary">Espace Admin</a>
+        {% endif %}
+        {% if 'ROLE_USER' in app.user.roles %}
+            <a href="{{ path('app_list_coach') }}" class="btn btn-success">Espace utilisateur</a>
+        {% endif %}
+    {% endif %}
+{% endif %}
 
 {% endblock %}

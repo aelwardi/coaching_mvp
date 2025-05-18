@@ -1,16 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <div class="container my-5">
-        <div class="row">
-            <div class="col-md-6">
-                <img class="img-fluid" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}">
-            </div>
-            <div class="col-md-6">
-                <small>
-                    <i>
-                        <a href="{{ path('app_coach', { slug : programme.coach.slug })}}">{{ programme.coach.fullName }}</a>
-                        {{ programme.title }}
-                    </i>
-                </small>
+    <div class="row">
+        <div class="col-md-5">
+            <img class="img-fluid rounded shadow" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}">
+        </div>
+        <div class="col-md-7">
+            <h2 class="mb-3">{{ programme.title }}</h2>
+            <p>
+                <strong>Coach :</strong>
+                <a href="{{ path('app_coach', { slug : programme.coach.slug })}}" class="text-decoration-none">
+                    {{ programme.coach.fullName }}
+                </a>
+            </p>
+            <div class="mb-4">
                 {{ programme.description|raw }}
             </div>
         </div>
     </div>
+
+    <hr class="my-5">
+
+    <h3 class="mb-4">Séances</h3>
+    {% if programme.seances|length > 0 %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for seance in programme.seances %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ seance.date|date('d/m/Y') }}</h5>
+                            <p class="mb-1"><strong>Début :</strong> {{ seance.startAt|date('H:i') }}</p>
+                            <p class="mb-1"><strong>Fin :</strong> {{ seance.endAt|date('H:i') }}</p>
+                            <span class="badge bg-{{ seance.status.value == 'Validée' ? 'success' : (seance.status.value == 'Annulée' ? 'danger' : 'secondary') }}">
+                                {{ seance.status.value }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">Aucune séance prévue pour ce programme.</div>
+    {% endif %}
+</div>
+{% endblock %}

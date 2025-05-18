@@ -43,9 +43,6 @@ class RegisterUserForm extends AbstractType
             ->add('lastName', TextType::class, [
                 'label' => 'Nom de famille',
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 's\'inscrire',
-            ])
         ;
     }
 

@@ -21,8 +21,10 @@ class PasswordUserForm extends AbstractType
             ->add('currentPassword', PasswordType::class, [
                 'label' => 'Votre mot de passe actuel',
                 'attr' => [
-                    'placeholder' => 'indiquez votre mot de passe actuel'
+                    'placeholder' => 'indiquez votre mot de passe actuel',
+                    'class' => 'form-control'
                 ],
+                'row_attr' => ['class' => 'mb-3'],
                 'mapped' => false,
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -30,20 +32,25 @@ class PasswordUserForm extends AbstractType
                 'first_options'  => [
                     'label' => 'Votre nouveau mot de passe',
                     'attr' => [
-                        'placeholder' => 'Choisissez votre nouveau mot de passe'
+                        'placeholder' => 'Choisissez votre nouveau mot de passe',
+                        'class' => 'form-control'
                     ],
+                    'row_attr' => ['class' => 'mb-3'],
                     'hash_property_path' => 'password'
                 ],
                 'second_options' => [
                     'label' => 'Confirmez votre nouveau mot de passe',
                     'attr' => [
-                        'placeholder' => 'Confirmez votre nouveau mot de passe'
+                        'placeholder' => 'Confirmez votre nouveau mot de passe',
+                        'class' => 'form-control'
                     ],
+                    'row_attr' => ['class' => 'mb-3'],
                 ],
                 'mapped' => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Mettre à jour mon mot de passe'
+                'label' => 'Mettre à jour mon mot de passe',
+                'attr' => ['class' => 'btn btn-primary mt-3 w-100']
             ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $from = $event->getForm();

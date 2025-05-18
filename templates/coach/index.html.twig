@@ -1,15 +1,47 @@
-<div>
-    <h1>Coaches</h1>
-    <h1>{{ coach.fullName }}</h1>
-    <p>Cette coach contient {{ coach.programmes|length }} programme(s).</p>
-    <div class="row">
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-2 text-center">
+            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                <span class="text-white fs-1"></span>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <h1 class="mb-1 text-primary">{{ coach.fullName }}</h1>
+            <p class="mb-2 text-muted">{{ coach.speciality ?? 'Coach' }}</p>
+            <span class="badge bg-info fs-6">Programmes : {{ coach.programmes|length }}</span>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h4>Description</h4>
+        <p class="fs-5">{{ coach.description }}</p>
+    </div>
+    <hr>
+    <div>
+        <h4 class="mb-3">Programmes proposés</h4>
+        <div class="row g-4">
             {% for programme in coach.programmes %}
-                <div class="col-md-3 text-center">
-                    <a class="text-decoration-none" href="{{ path('app_programme', { 'slug': programme.slug }) }}">
-                        <img class="img-fluid" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}">
-                        <span class="d-block fw-bold text-black">{{ programme.title }}</span>
-                    </a>
+                <div class="col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <a href="{{ path('app_programme', { 'slug': programme.slug }) }}" class="text-decoration-none">
+                            <img class="card-img-top" src="/uploads/{{ programme.image }}" alt="{{ programme.title }}" style="height: 180px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">{{ programme.title }}</h5>
+                                <p class="card-text text-muted small">{{ programme.shortDescription|default('') }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        Aucun programme disponible pour ce coach.
+                    </div>
                 </div>
             {% endfor %}
-        </div> 
+        </div>
+    </div>
 </div>
+{% endblock %}

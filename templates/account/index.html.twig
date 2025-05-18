@@ -1,10 +1,17 @@
-<div>
-    <h1>Espace membre</h1>
-    <div>
-        <h2>Mes informations</h2>
-        <p>Nom : {{ app.user.firstName }} {{ app.user.lastName }}</p>
-        <p>Email : {{ app.user.email }}</p>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="account-container" style="max-width: 500px; margin: 2rem auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 2rem;">
+    <h1 style="text-align: center; color: #2c3e50;">Espace membre</h1>
+    <div class="account-info" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.3rem; color: #34495e;">Mes informations</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Nom :</strong> {{ app.user.firstName }} {{ app.user.lastName }}</li>
+            <li><strong>Email :</strong> {{ app.user.email }}</li>
+        </ul>
     </div>
-    <p><a href="{{ path('app_logout') }}">Se déconnecter</a></p>
-    <p><a href="{{ path('app_account_modify_password') }}">Changer mon mot de passe</a></p>
+    <div class="account-actions" style="display: flex; flex-direction: column; gap: 1rem;">
+        <a href="{{ path('app_account_modify_password') }}" class="btn btn-primary" style="background: #2980b9; color: #fff; padding: 0.5rem 1rem; border-radius: 4px; text-align: center; text-decoration: none;">Changer mon mot de passe</a>
+        </div>
 </div>
+{% endblock %}
